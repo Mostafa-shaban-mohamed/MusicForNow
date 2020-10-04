@@ -1,0 +1,14 @@
+﻿@model MusicForNow.Models.FileDataVM
+
+@using (Html.BeginForm("UploadImages", "Songs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div>
+        @Html.LabelFor(x => x.File)
+        @Html.TextBoxFor(x => x.File, new { type = "file" })
+        @Html.ValidationMessageFor(x => x.File)
+    </div>
+
+    <button type="submit">Upload</button>
+}
+
+

@@ -1,0 +1,23 @@
+﻿@model MusicForNow.Models.User
+
+<h2>@Model.Email</h2>
+
+<div>
+    <hr />
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        @Html.DisplayNameFor(model => model.Email) &emsp; @Html.DisplayFor(model => model.Email)
+        <br />
+        <br />
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Delete The Account", "Delete", new { id = Model.ID }, new { @class = "btn btn-danger" })
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <p style="font-family:'DejaVu Math TeX Gyre'; font-size:x-large">
+            Your Library:
+        </p>
+        <br />
+        @Html.ActionLink("Songs", "Index", "Songs", new { }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Albums", "Index", "Albums", new { }, new { @class = "btn btn-danger" })
+        @Html.ActionLink("Artists", "Index", "Artists", new { }, new { @class = "btn btn-danger" })
+    </div>
+</div>

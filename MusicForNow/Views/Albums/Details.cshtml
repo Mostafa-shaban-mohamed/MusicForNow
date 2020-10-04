@@ -1,0 +1,73 @@
+﻿@model MusicForNow.Models.Album
+
+<div class="col-lg-12 col-md-12 col-sm-12">
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Album_Title)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Album_Title)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ReleaseDate)
+            </dt>
+
+            <dd>
+                @String.Format("{0:dd/MM/yyyy}", Model.ReleaseDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.List_Of_Songs)
+            </dt>
+
+            <dd>
+                @{ 
+                    var s = Model.List_Of_Songs.Split(',');
+                }
+                <ul>
+                    @foreach (var c in s)
+                    {
+                        <li>@c</li>
+                    }
+                </ul>
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Artist1.Name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Artist1.Name)
+            </dd>
+
+        </dl>
+    </div>
+    
+    <div class="col-lg-6 col-md-6 col-sm-6">
+        @{
+            string imreBase64Data = Convert.ToBase64String(Model.Image);
+            string imgDataURL = string.Format("data:image/png;base64,{0}", imreBase64Data);
+        }
+        <img src="@imgDataURL" alt="Avatar" style="width:100%">
+        <br />
+        <br />
+    </div>
+    @if (User.IsInRole("Admin"))
+    {
+        <p class="left">
+            <a class="btn btn-danger left" href="@Url.Action("Edit", new { id = Model.Album_ID })"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+            <a class="btn btn-danger left" href="@Url.Action("Delete", new { id = Model.Album_ID })"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+            <a class="btn btn-danger left" href="@Url.Action("Index", "Songs", new { AlbumID = Model.Album_ID })"><span class="glyphicon glyphicon-music"></span> Songs</a>
+        </p>
+    }
+    else
+    {
+        <p class="left">
+            <a class="btn btn-danger left" href="@Url.Action("Index", "Songs", new { AlbumID = Model.Album_ID })"><span class="glyphicon glyphicon-music"></span> Songs</a>
+        </p>
+    }
+
+</div>

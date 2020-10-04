@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MusicForNow.Models.Artist>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Artists List</h2>
+
+@if (User.IsInRole("Admin"))
+{
+    <p>
+        <a class="btn btn-danger" href="@Url.Action("Create")"><span class="glyphicon glyphicon-plus"></span> Create</a>
+    </p>
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="column">
+            <div class="card" id="@item.ID">
+                <div>
+                    <h4 class="cardElements"><b>@item.Name</b></h4>
+                    <p class="cardElements">Age: @item.Age</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<!-- modal pop up -->
+<div id='myModalD' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h2 class="modal-title">Details</h2>
+            </div>
+            <div id='myModalContentD' class="modal-body"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+
+</div> 
+
+
+@section Scripts{
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.card').on('click', function () {
+                var id_art = $(this).attr("id");
+                var url = '/Artists/Details';
+                var options = { "backdrop": "static", keyboard: true };
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    contentType: "application/json; charset=utf-8",
+                    data: { "Id": id_art },
+                    datatype: "json",
+                    success: function (data) {
+                        $('#myModalContentD').html(data);
+                        $('#myModalD').modal(options);
+                        $('#myModalD').modal('show');
+
+                    },
+                    error: function () {
+                        alert("Dynamic content load failed.");
+                    }
+                });
+            });
+            $("#closbtn").click(function () {
+                $('#myModalD').modal('hide');
+            });
+        });
+    </script>    
+}

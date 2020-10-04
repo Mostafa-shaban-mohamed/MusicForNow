@@ -1,0 +1,50 @@
+﻿@model MusicForNow.Models.Album
+
+
+<h2>Are you sure you want to delete this album?</h2>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Album_Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Album_Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ReleaseDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ReleaseDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.List_Of_Songs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.List_Of_Songs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Artist1.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Artist1.Name)
+        </dd>
+
+    </dl>
+</div>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" /> &ensp;
+            @Html.ActionLink("Back to List", "Index", new { }, new { @class = "btn btn-danger"})
+        </div>
+    }

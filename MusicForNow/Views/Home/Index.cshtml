@@ -1,0 +1,31 @@
+﻿<section class="bursts-hero ripple-background">
+    <div class='circle xxlarge'></div>
+    <div class='circle xlarge'></div>
+    <div class='circle large'></div>
+    @*<div class='circle mediun'></div>*@
+    <div class="smallCircle">
+        <div>
+            <img src="~/Content/Image/MusicForNowLogo.png" class="center img-responsive" />
+        </div>
+        <br />
+        <br />
+        <div class="bursts-heading">
+            <h1 style="text-align:center">Music For Now</h1>
+            <br />
+            <h4 style="text-align:center">Your World of Music.</h4>
+            <br />
+            <br />
+            <button id="Startbtn" class="btn">Get Start For Free</button>
+        </div>
+    </div>
+</section>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Startbtn').click(function () {
+                location.href = '@Url.Action("Create", "Users")';
+            });
+        });
+    </script>    
+}
