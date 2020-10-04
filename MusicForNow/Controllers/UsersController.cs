@@ -121,6 +121,7 @@ namespace MusicForNow.Controllers
             return View();
         }
 
+
         // GET: Users/Edit/5
         [Authorize(Roles = "User")]
         public ActionResult Edit(string id)
